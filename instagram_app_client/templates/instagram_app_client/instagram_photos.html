@@ -1,8 +1,9 @@
+<p>Test default</p>
+{{ photos.text }}
 <ul>
-Test
 {% for photo in photos %}
     <li>
-    	<img src="{{ photo.photo }}">
+    	<img src="http://insta-dev.softformance.com/media/{{ photo.photo }}" alt="">       
     </li>
 {% endfor %}
 </ul>
