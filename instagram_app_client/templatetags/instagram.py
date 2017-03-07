@@ -8,7 +8,7 @@ USER_AUTH_DATA = 'instagram-app'
 PASS_AUTH_DATA = 'app-instagram'
 
 @register.inclusion_tag('instagram_app_client/instagram_photos.html', takes_context=True)
-def show_posts(context, app_id, tags, count=None, order_by=None, class_widget=None):
+def show_posts(context, tags, app_id=settings.INSTAGRAM_APP_ID, count=None, order_by=None, class_widget=None):
     """
     {% show_posts app_id=1 tags='test,dilly' %}
     """
