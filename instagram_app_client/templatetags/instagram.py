@@ -8,7 +8,7 @@ USER_AUTH_DATA = 'instagram-app'
 PASS_AUTH_DATA = 'app-instagram'
 
 @register.inclusion_tag('instagram_app_client/instagram_photos.html', takes_context=True)
-def show_posts(context, app_id, tags, count=None, order_by=None):
+def show_posts(context, app_id, tags, count=None, order_by=None, class_widget=None):
     """
     {% show_posts app_id=1 tags='test,dilly' %}
     """
@@ -22,4 +22,4 @@ def show_posts(context, app_id, tags, count=None, order_by=None):
         data = requests.get(local_url, auth=(USER_AUTH_DATA, PASS_AUTH_DATA), params=params)
     else:
         data = requests.get(local_url, params=params)
-    return {'photos': data.json}
+    return {'photos': data.json, 'CLASS_WIDGET': class_widget}

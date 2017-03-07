@@ -1,5 +1,5 @@
 {% for photo in photos %}
-    <a href="{{ photo.link }}">
+    <a href="{{ photo.link }}" {% if CLASS_WIDGET %}class="{{ CLASS_WIDGET }}"{% endif %}>
         <img src="http://insta-dev.softformance.com/media/{{ photo.photo }}" alt="">       
     </a>
 {% endfor %}
