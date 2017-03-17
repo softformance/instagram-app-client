@@ -1,5 +1,5 @@
 {% for photo in photos %}
-    <a href="http://insta-dev.softformance.com/media/{{ photo.photo }}" class="fancybox{% if CLASS_WIDGET %} {{ CLASS_WIDGET }}{% endif %}" rel="group" title="{{ photo.caption }}">
+    <a href="http://insta-dev.softformance.com/media/{{ photo.photo }}" class="fancybox{% if CLASS_WIDGET %} {{ CLASS_WIDGET }}{% endif %} hidden" rel="group" title="{{ photo.caption }}">
         <img src="http://insta-dev.softformance.com/media/{{ photo.photo }}" alt="" width="150" height="150">
     </a>
 {% endfor %}
