@@ -1,7 +1,7 @@
 {% load thumbnail %}
 
 {% for photo in photos %}
-{% with "http://stream.dillysocks.com/media/"|add: photo.photo as url %}
+{% with url="http://stream.dillysocks.com/media/"|add: photo.photo %}
 <a href="{{ url }}" class="fancybox{% if CLASS_WIDGET %} {{ CLASS_WIDGET }}{% endif %} hidden" rel="group" title="{{ photo.caption }}">
   <img src="{% thumbnail url 350x350 crop %}" alt="" width="150" height="150">
 </a>
