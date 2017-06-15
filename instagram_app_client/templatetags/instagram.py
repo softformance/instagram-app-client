@@ -1,6 +1,7 @@
 import requests
 from django import template
 from instagram_app_client import app_settings
+from urllib import unquote
 
 register = template.Library()
 URL_GRAB = app_settings.BASE_URL + '/instagram_app/get_posts/'
@@ -11,6 +12,7 @@ def show_posts(context, tags, app_id=app_settings.INSTAGRAM_APP_ID, count=None, 
     {% show_posts app_id=1 tags='test,dilly' %}
     """
     params = {}
+    tags = unquote(tags)
     tags = [element.lower() for element in tags.split(', ')]
     params['tags'] = tags
     params['count'] = str(count)
