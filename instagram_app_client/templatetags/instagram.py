@@ -1,4 +1,6 @@
 import requests
+import re
+
 from django import template
 from django.conf import settings
 from instagram_app_client import app_settings
@@ -14,7 +16,7 @@ def show_posts(context, tags, app_id=app_settings.INSTAGRAM_APP_ID, count=None, 
     """
     params = {}
     tags = unquote(tags)
-    tags = [element.lower() for element in tags.split(', ')]
+    tags = re.findall(r"[\w']+", tags.lower())
     params['tags'] = tags
     params['count'] = str(count)
     params['order_by'] = str(order_by)
