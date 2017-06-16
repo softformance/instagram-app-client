@@ -1,11 +1,10 @@
+import re
 import requests
 from django import template
 from instagram_app_client import app_settings
 from urllib import unquote
-import logging
 
 # Get an instance of a logger
-logger = logging.getLogger(__name__)
 register = template.Library()
 URL_GRAB = app_settings.BASE_URL + '/instagram_app/get_posts/'
 
@@ -16,11 +15,10 @@ def show_posts(context, tags, app_id=app_settings.INSTAGRAM_APP_ID, count=None, 
     """
     params = {}
     tags = unquote(tags)
-    tags = [element.lower() for element in tags.split(', ')]
+    tags = re.findall(r"[\w']+", tags.lower())
     params['tags'] = tags
     params['count'] = str(count)
-    logger.error("Ordering by %s" % order_by)
-    params['order_by'] = str('Test: %s' % order_by)
+    params['order_by'] = order_by
     local_url = URL_GRAB + str(app_id)
     data = requests.get(local_url, params=params)
     return {'photos': data.json, 'CLASS_WIDGET': class_widget}
