@@ -1,5 +1,6 @@
 import requests
 from django import template
+from django.conf import settings
 from instagram_app_client import app_settings
 from urllib import unquote
 
@@ -19,4 +20,5 @@ def show_posts(context, tags, app_id=app_settings.INSTAGRAM_APP_ID, count=None, 
     params['order_by'] = str(order_by)
     local_url = URL_GRAB + str(app_id)
     data = requests.get(local_url, params=params)
+    url = getattr(settings, 'INSTAGRAM_APP_URL', 'http://stream.dillysocks.com/')
     return {'photos': data.json, 'CLASS_WIDGET': class_widget}
