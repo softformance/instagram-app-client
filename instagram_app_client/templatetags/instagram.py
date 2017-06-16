@@ -23,4 +23,4 @@ def show_posts(context, tags, app_id=app_settings.INSTAGRAM_APP_ID, count=None, 
     local_url = URL_GRAB + str(app_id)
     data = requests.get(local_url, params=params)
     url = getattr(settings, 'INSTAGRAM_APP_URL', 'http://stream.dillysocks.com/')
-    return {'photos': data.json, 'CLASS_WIDGET': class_widget}
+    return {'photos': data.json, 'CLASS_WIDGET': class_widget, 'url': url}
