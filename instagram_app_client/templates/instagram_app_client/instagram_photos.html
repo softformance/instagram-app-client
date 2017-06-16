@@ -1,5 +1,5 @@
 {% for photo in photos %}
-<a href="http://stream.dillysocks.com/media/{{photo.photo}}"
+<a href="http://stream.dillysocks.com/{{photo.photo}}"
    class="fancybox{% if CLASS_WIDGET %} {{ CLASS_WIDGET }}{% endif %} hidden" rel="group" title="{{ photo.caption }}">
   <img src="http://stream.dillysocks.com{{ photo.thumb }}" alt="" width="150" height="150">
 </a>
