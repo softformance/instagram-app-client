@@ -4,10 +4,14 @@ from django import template
 from django.conf import settings
 from instagram_app_client import app_settings
 from urllib import unquote
+from urlparse import urljoin
+from ..models import *
+
 
 # Get an instance of a logger
 register = template.Library()
-URL_GRAB = app_settings.BASE_URL + '/instagram_app/get_posts/'
+
+STREAM_SETTINGS = GlobalInstagramFeedSetings.objects.get()
 
 @register.inclusion_tag('instagram_app_client/instagram_photos.html', takes_context=True)
 def show_posts(context, tags, app_id=app_settings.INSTAGRAM_APP_ID, count=None, order_by=None, class_widget=None):
@@ -20,7 +24,17 @@ def show_posts(context, tags, app_id=app_settings.INSTAGRAM_APP_ID, count=None, 
     params['tags'] = tags
     params['count'] = str(count)
     params['order_by'] = order_by
-    local_url = URL_GRAB + str(app_id)
-    data = requests.get(local_url, params=params)
-    url = getattr(settings, 'INSTAGRAM_APP_URL', 'http://stream.dillysocks.com/')
-    return {'photos': data.json, 'CLASS_WIDGET': class_widget, 'url': url}
+    local_url = urljoin(STREAM_SETTINGS.stream_url, '/instagram_app/get_posts/', str(app_id))
+
+    try:
+        if STREAM_SETTINGS.stream_enabled:
+            data = requests.get(local_url, params=params)
+            return {
+                'photos': data.json,
+                'CLASS_WIDGET': class_widget,
+                'url': STREAM_SETTINGS.stream_url
+            }
+        else:
+            return {}
+    except:
+        return {}

@@ -56,7 +56,9 @@ setup(
         'instagram_app_client',
     ],
     include_package_data=True,
-    install_requires=[],
+    install_requires=[
+        'django-solo==1.1.0',
+    ],
     license="MIT",
     zip_safe=False,
     keywords='instagram-app-client',
