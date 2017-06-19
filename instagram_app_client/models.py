@@ -13,7 +13,7 @@ class GlobalInstagramFeedSetings(SingletonModel):
     """
     Global instagram feed settings singleton.
     """
-    stream_enabled = models.BooleanFiled(
+    stream_enabled = models.BooleanField(
         verbose_name=_(u'Enable instagram feed'),
         help_text=_('Enable/disable instagram feed site-wide'),
         default=True,
