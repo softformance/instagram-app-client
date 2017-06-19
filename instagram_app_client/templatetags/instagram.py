@@ -5,13 +5,15 @@ from django.conf import settings
 from instagram_app_client import app_settings
 from urllib import unquote
 from urlparse import urljoin
-from ..models import *
+from constance import config
 
 
 # Get an instance of a logger
 register = template.Library()
 
-STREAM_SETTINGS = GlobalInstagramFeedSetings.objects.get()
+STREAM_URL = getattr(config, 'INSTAGRAM_STREAM_URL', 'http://stream.dillysocks.com/')
+STREAM_ENABLED = getattr(config, 'INSTAGRAM_STREAM_ENABLED', True)
+
 
 @register.inclusion_tag('instagram_app_client/instagram_photos.html', takes_context=True)
 def show_posts(context, tags, app_id=app_settings.INSTAGRAM_APP_ID, count=None, order_by=None, class_widget=None):
@@ -24,15 +26,15 @@ def show_posts(context, tags, app_id=app_settings.INSTAGRAM_APP_ID, count=None, 
     params['tags'] = tags
     params['count'] = str(count)
     params['order_by'] = order_by
-    local_url = urljoin(STREAM_SETTINGS.stream_url, '/instagram_app/get_posts/', str(app_id))
+    local_url = urljoin(STREAM_URL, '/instagram_app/get_posts/', str(app_id))
 
     try:
-        if STREAM_SETTINGS.stream_enabled:
+        if STREAM_ENABLED:
             data = requests.get(local_url, params=params)
             return {
                 'photos': data.json,
                 'CLASS_WIDGET': class_widget,
-                'url': STREAM_SETTINGS.stream_url
+                'url': STREAM_URL
             }
         else:
             return {}
