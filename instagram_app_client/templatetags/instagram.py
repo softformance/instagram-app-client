@@ -31,8 +31,9 @@ def show_posts(context, tags, app_id=app_settings.INSTAGRAM_APP_ID, count=None, 
     try:
         if STREAM_ENABLED:
             data = requests.get(local_url, params=params)
+            data = data.json # Will fail silently here in case of any issues
             return {
-                'photos': data.json,
+                'photos': data,
                 'CLASS_WIDGET': class_widget,
                 'url': STREAM_URL
             }
