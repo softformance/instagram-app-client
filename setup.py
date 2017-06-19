@@ -58,6 +58,7 @@ setup(
     include_package_data=True,
     install_requires=[
         'django-solo==1.1.0',
+        'future',
     ],
     license="MIT",
     zip_safe=False,
