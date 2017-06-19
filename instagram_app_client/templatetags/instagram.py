@@ -1,13 +1,22 @@
 import re
 import requests
+import os
+
 from django import template
 from django.conf import settings
-from instagram_app_client import app_settings
+
 from urllib import unquote
+from urlparse import urljoin
+from constance import config
+
+from instagram_app_client import app_settings
 
 # Get an instance of a logger
 register = template.Library()
-URL_GRAB = app_settings.BASE_URL + '/instagram_app/get_posts/'
+
+STREAM_URL = getattr(config, 'INSTAGRAM_STREAM_URL', 'http://stream.dillysocks.com/')
+STREAM_ENABLED = getattr(config, 'INSTAGRAM_STREAM_ENABLED', True)
+
 
 @register.inclusion_tag('instagram_app_client/instagram_photos.html', takes_context=True)
 def show_posts(context, tags, app_id=app_settings.INSTAGRAM_APP_ID, count=None, order_by=None, class_widget=None):
@@ -20,7 +29,18 @@ def show_posts(context, tags, app_id=app_settings.INSTAGRAM_APP_ID, count=None, 
     params['tags'] = tags
     params['count'] = str(count)
     params['order_by'] = order_by
-    local_url = URL_GRAB + str(app_id)
-    data = requests.get(local_url, params=params)
-    url = getattr(settings, 'INSTAGRAM_APP_URL', 'http://stream.dillysocks.com/')
-    return {'photos': data.json, 'CLASS_WIDGET': class_widget, 'url': url}
+    local_url = urljoin(STREAM_URL, os.path.join('/instagram_app/get_posts/', str(app_id)))
+
+    try:
+        if STREAM_ENABLED:
+            data = requests.get(local_url, params=params)
+            data = data.json() # Will fail silently here in case of any issues
+            return {
+                'photos': data,
+                'CLASS_WIDGET': class_widget,
+                'url': STREAM_URL
+            }
+        else:
+            return {}
+    except:
+        return {}
