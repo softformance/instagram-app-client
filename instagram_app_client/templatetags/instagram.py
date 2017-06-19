@@ -1,12 +1,15 @@
 import re
 import requests
+import os
+
 from django import template
 from django.conf import settings
-from instagram_app_client import app_settings
+
 from urllib import unquote
 from urlparse import urljoin
 from constance import config
 
+from instagram_app_client import app_settings
 
 # Get an instance of a logger
 register = template.Library()
@@ -26,7 +29,7 @@ def show_posts(context, tags, app_id=app_settings.INSTAGRAM_APP_ID, count=None, 
     params['tags'] = tags
     params['count'] = str(count)
     params['order_by'] = order_by
-    local_url = urljoin(STREAM_URL, '/instagram_app/get_posts/', str(app_id))
+    local_url = urljoin(STREAM_URL, os.path.join('/instagram_app/get_posts/', str(app_id)))
 
     try:
         if STREAM_ENABLED:
