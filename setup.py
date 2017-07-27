@@ -5,9 +5,9 @@ import re
 import sys
 
 try:
-    from setuptools import setup
+    from setuptools import setup, find_packages
 except ImportError:
-    from distutils.core import setup
+    from distutils.core import setup, find_packages
 
 
 def get_version(*file_paths):
@@ -50,11 +50,12 @@ setup(
     long_description=readme + '\n\n',
     author='Dmytro Litvinov, Anton Linevych, Igor Margitych',
     author_email='dmytro.litvinov@softformance.com, anton.linevich@softformance.com',
-    url='https://github.com/dmytrolitvinov/instagram-app-client',
-    packages=[
-        'instagram_app_client',
-    ],
+    url='https://github.com/softformance/instagram-app-client',
+    packages=find_packages(),
     include_package_data=True,
+    package_data={
+        '' : ['*.html', '*.js', '*.css',],
+    },
     install_requires=[],
     license="",
     zip_safe=False,
@@ -62,14 +63,10 @@ setup(
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Framework :: Django',
-        'Framework :: Django :: 1.10',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Natural Language :: English',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
     ],
 )
