@@ -1,7 +1,7 @@
 {% if photos %}
   {% for photo in photos %}
     <a href="{{ url }}{{ photo.photo }}" class="fancybox{% if CLASS_WIDGET %} {{ CLASS_WIDGET }}{% endif %} hidden"
-       rel="group" data-title="photo-title-{{ photo.media_id }}">
+       rel="group" data-title-id="photo-title-{{ photo.media_id }}">
       <img src="{{ url }}{{ photo.thumb }}" alt="{{ photo.caption }}" width="150" height="150">
     </a>
     <div id="photo-title-{{ photo.media_id }}" class="fancybox-title hidden">
