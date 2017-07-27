@@ -1,30 +1,31 @@
 {% if photos %}
-{% for photo in photos %}
-<a href="{{ url }}{{photo.photo}}" class="fancybox{% if CLASS_WIDGET %} {{ CLASS_WIDGET }}{% endif %} hidden"
-   rel="group" data-title="photo-title-{{ photo.media_id }}">
-  <img src="{{ url }}{{ photo.thumb }}" alt="{{photo.caption}}" width="150" height="150">
-</a>
-<div id="#photo-title-{{photo.media_id}}" class="fancybox-title" hidden>
-    <a href="{{photo.link}}">{{photo.username}}</a> {{photo.caption}}
-</div>
-{% endfor %}
+  {% for photo in photos %}
+    <a href="{{ url }}{{ photo.photo }}" class="fancybox{% if CLASS_WIDGET %} {{ CLASS_WIDGET }}{% endif %} hidden"
+       rel="group" data-title="photo-title-{{ photo.media_id }}">
+      <img src="{{ url }}{{ photo.thumb }}" alt="{{ photo.caption }}" width="150" height="150">
+    </a>
+    <div id="#photo-title-{{ photo.media_id }}" class="fancybox-title" hidden>
+      <a href="{{ photo.link }}">{{ photo.username }}</a> {{ photo.caption }}
+    </div>
+  {% endfor %}
 {% endif %}
 <script type="text/javascript">
- $(function () {
-    $(".fancybox")
-    .attr('rel', 'gallery')
-    .fancybox({
-        beforeLoad: function() {
-            var el, id = $(this.element).data('title-id');
+    function initInstagramStream() {
+        $(".fancybox")
+            .attr('rel', 'gallery')
+            .fancybox({
+                beforeLoad: function () {
+                    var el, id = $(this.element).data('title-id');
 
-            if (id) {
-                el = $('#' + id);
-            
-                if (el.length) {
-                    this.title = el.html();
+                    if (id) {
+                        el = $('#' + id);
+
+                        if (el.length) {
+                            this.title = el.html();
+                        }
+                    }
                 }
-            }
-        }
-    });
-})
+            });
+    }
+    document.addEventListener('DOMContentLoaded', initInstagramStream);
 </script>
