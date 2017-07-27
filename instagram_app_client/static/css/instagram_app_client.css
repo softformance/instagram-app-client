@@ -1,6 +1,7 @@
 .fancybox-title > .child {
   word-break: keep-all;
   white-space: pre-wrap;
+  line-height: 20px;
 }
 
 .fancybox-title > .child > a {

@@ -11,23 +11,4 @@
   {% endfor %}
 {% endif %}
 <link type="text/css" rel="stylesheet" href="{% static 'css/instagram_app_client.css' %}"/>
-<script type="text/javascript">
-    function initInstagramStream() {
-        $(".fancybox")
-            .attr('rel', 'gallery')
-            .fancybox({
-                beforeLoad: function () {
-                    var el, id = $(this.element).data('title-id');
-
-                    if (id) {
-                        el = $('#' + id);
-
-                        if (el.length) {
-                            this.title = el.html();
-                        }
-                    }
-                }
-            });
-    }
-    document.addEventListener('DOMContentLoaded', initInstagramStream);
-</script>
+<script type="text/javascript" src="{% static 'js/instagram_app_client.js' %}"></script>
