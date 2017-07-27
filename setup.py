@@ -42,22 +42,21 @@ if sys.argv[-1] == 'tag':
     sys.exit()
 
 readme = open('README.rst').read()
-history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 setup(
     name='instagram-app-client',
     version=version,
     description="""A sample Django package""",
     long_description=readme + '\n\n' + history,
-    author='Dmytro Litvinov',
-    author_email='dmytro.litvinov@softformance.com',
+    author='Dmytro Litvinov, Anton Linevych, Igor Margitych',
+    author_email='dmytro.litvinov@softformance.com, anton.linevich@softformance.com',
     url='https://github.com/dmytrolitvinov/instagram-app-client',
     packages=[
         'instagram_app_client',
     ],
     include_package_data=True,
     install_requires=[],
-    license="MIT",
+    license="",
     zip_safe=False,
     keywords='instagram-app-client',
     classifiers=[
