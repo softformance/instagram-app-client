@@ -4,7 +4,7 @@
        rel="group" data-title="photo-title-{{ photo.media_id }}">
       <img src="{{ url }}{{ photo.thumb }}" alt="{{ photo.caption }}" width="150" height="150">
     </a>
-    <div id="#photo-title-{{ photo.media_id }}" class="fancybox-title" hidden>
+    <div id="#photo-title-{{ photo.media_id }}" class="fancybox-title hidden">
       <a href="{{ photo.link }}">{{ photo.username }}</a> {{ photo.caption }}
     </div>
   {% endfor %}
