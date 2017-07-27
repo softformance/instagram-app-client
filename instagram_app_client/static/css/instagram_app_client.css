@@ -1,0 +1,8 @@
+.fancybox-title > .child {
+  word-break: keep-all;
+  white-space: pre-wrap;
+}
+
+.fancybox-title > .child > a {
+  color: #ffffff;
+}
