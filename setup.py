@@ -47,7 +47,7 @@ setup(
     name='instagram-app-client',
     version=version,
     description="""A sample Django package""",
-    long_description=readme + '\n\n' + history,
+    long_description=readme + '\n\n',
     author='Dmytro Litvinov, Anton Linevych, Igor Margitych',
     author_email='dmytro.litvinov@softformance.com, anton.linevich@softformance.com',
     url='https://github.com/dmytrolitvinov/instagram-app-client',
