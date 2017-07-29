@@ -37,9 +37,12 @@ function bindPhotoAsLink(self) {
 function setTitleMargin(marginBottom) {
     var activeImage = $($(".fancybox-opened .fancybox-title")[0]);
 
-    marginBottom = marginBottom || 5;
+    marginBottom = marginBottom || 10;
     marginBottom = -activeImage.outerHeight() - marginBottom;
     activeImage.css("margin-bottom", marginBottom);
 }
 
+window.addEventListener('resize', function () {
+    setTitleMargin()
+});
 document.addEventListener('DOMContentLoaded', initInstagramStream);
