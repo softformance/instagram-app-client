@@ -2,11 +2,11 @@
 {% if photos %}
   {% for photo in photos %}
     <a href="{{ url }}{{ photo.photo }}" class="fancybox{% if CLASS_WIDGET %} {{ CLASS_WIDGET }}{% endif %} hidden"
-       rel="group" data-title-id="photo-title-{{ photo.media_id }}">
+       rel="group" data-title-id="photo-title-{{ photo.media_id }}" data-link="{{ photo.link }}">
       <img src="{{ url }}{{ photo.thumb }}" alt="{{ photo.caption }}" width="150" height="150">
     </a>
     <div id="photo-title-{{ photo.media_id }}" class="fancybox-title hidden">
-      <a href="{{ photo.link }}">@{{ photo.username }}</a> {{ photo.caption }}
+      <a href="https://www.instagram.com/{{ photo.username }}">@{{ photo.username }}</a> {{ photo.caption }}
     </div>
   {% endfor %}
 {% endif %}
