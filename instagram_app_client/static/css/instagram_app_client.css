@@ -7,3 +7,9 @@
 .fancybox-title > .child > a {
   color: #ffffff;
 }
+
+@media (min-width: 760px) {
+  .fancybox-title-float-wrap .child {
+    padding: 2px 10px;
+  }
+}
