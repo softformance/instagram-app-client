@@ -6,7 +6,7 @@
       <img src="{{ url }}{{ photo.thumb }}" alt="{{ photo.caption }}" width="150" height="150">
     </a>
     <div id="photo-title-{{ photo.media_id }}" class="fancybox-title hidden">
-      <a href="https://www.instagram.com/{{ photo.username }}">@{{ photo.username }}</a> {{ photo.caption }}
+      <a href="https://www.instagram.com/{{ photo.username }}" target="_blank">@{{ photo.username }}</a> {{ photo.caption }}
     </div>
   {% endfor %}
 {% endif %}

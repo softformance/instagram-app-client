@@ -1,25 +1,28 @@
-import re
-import requests
 import os
-
-from django import template
-from django.conf import settings
-
+import re
 from urllib import unquote
-from urlparse import urljoin
-from constance import config
 
-from instagram_app_client import app_settings
+import requests
+import requests_cache
+from django import template
+from urlparse import urljoin
+
+from instagram_app_client import app_settings as settings
+
+if settings.STREAM_ENABLE_CACHING:
+    # Enabling cache
+    requests_cache.install_cache(
+        'instagram_app_cache',
+        backend=settings.STREAM_CACHING_BACKEND,
+        expire_after=settings.STREAM_CACHE_EXPIRATION,
+    )
 
 # Get an instance of a logger
 register = template.Library()
 
-STREAM_URL = getattr(config, 'INSTAGRAM_STREAM_URL', 'http://stream.dillysocks.com/')
-STREAM_ENABLED = getattr(config, 'INSTAGRAM_STREAM_ENABLED', True)
-
 
 @register.inclusion_tag('instagram_app_client/instagram_photos.html', takes_context=True)
-def show_posts(context, tags, app_id=app_settings.INSTAGRAM_APP_ID, count=None, order_by=None, class_widget=None):
+def show_posts(context, tags, app_id=settings.INSTAGRAM_APP_ID, count=None, order_by=None, class_widget=None):
     """
     {% show_posts app_id=1 tags='test,dilly' %}
     """
@@ -29,16 +32,16 @@ def show_posts(context, tags, app_id=app_settings.INSTAGRAM_APP_ID, count=None, 
     params['tags'] = tags
     params['count'] = str(count)
     params['order_by'] = order_by
-    local_url = urljoin(STREAM_URL, os.path.join('/instagram_app/get_posts/', str(app_id)))
+    local_url = urljoin(settings.STREAM_URL, os.path.join('/instagram_app/get_posts/', str(app_id)))
 
     try:
-        if STREAM_ENABLED:
+        if settings.STREAM_ENABLED:
             data = requests.get(local_url, params=params)
-            data = data.json() # Will fail silently here in case of any issues
+            data = data.json()  # Will fail silently here in case of any issues
             return {
                 'photos': data,
                 'CLASS_WIDGET': class_widget,
-                'url': STREAM_URL
+                'url': settings.STREAM_URL
             }
         else:
             return {}

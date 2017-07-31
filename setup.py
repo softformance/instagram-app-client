@@ -23,10 +23,10 @@ def get_version(*file_paths):
 
 version = get_version("instagram_app_client", "__init__.py")
 
-
 if sys.argv[-1] == 'publish':
     try:
         import wheel
+
         print("Wheel version: ", wheel.__version__)
     except ImportError:
         print('Wheel library missing. Please run "pip install wheel"')
@@ -54,9 +54,12 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     package_data={
-        '' : ['*.html', '*.js', '*.css',],
+        '': ['*.html', '*.js', '*.css', ],
     },
-    install_requires=[],
+    install_requires=[
+        'requests==2.18.2',
+        'requests-cache==0.4.13',
+    ],
     license="",
     zip_safe=False,
     keywords='instagram-app-client',
