@@ -10,9 +10,9 @@ Configuration
 Django
 ======
 
-- :code:`INSTAGRAM_APP_ID` --- App ID. Default 1.
-- :code:`INSTAGRAM_STREAM_CACHING_BACKEND` --- Caching backend for :code:`requests-cache`. Default :code:`'memory'`.
-    `Docs <https://requests-cache.readthedocs.io/en/latest/user_guide.html#persistence>`_.
+- :code:`INSTAGRAM_APP_ID` — App ID. Default 1.
+- :code:`INSTAGRAM_STREAM_CACHING_BACKEND` — Caching backend for :code:`requests-cache`. Default :code:`'memory'`.
+  `Docs <https://requests-cache.readthedocs.io/en/latest/user_guide.html#persistence>`_.
 
 Constance
 =========
