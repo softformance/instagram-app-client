@@ -9,12 +9,13 @@ from urlparse import urljoin
 
 from instagram_app_client import app_settings as settings
 
-# Enabling cache
-requests_cache.install_cache(
-    'instagram_app_cache',
-    backend=settings.STREAM_CACHING_BACKEND,
-    expire_after=settings.STREAM_CACHE_EXPIRATION
-)
+if settings.STREAM_ENABLE_CACHING:
+    # Enabling cache
+    requests_cache.install_cache(
+        'instagram_app_cache',
+        backend=settings.STREAM_CACHING_BACKEND,
+        expire_after=settings.STREAM_CACHE_EXPIRATION,
+    )
 
 # Get an instance of a logger
 register = template.Library()
