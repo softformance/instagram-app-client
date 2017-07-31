@@ -4,7 +4,7 @@ function initInstagramStream() {
     $(".fancybox").attr("rel", "gallery").fancybox({
         margin: [20, 20, 100, 20],
         autoHeight: true,
-        arrows: false,
+        arrows: true,
         beforeLoad: function () {
             divAsTitle(this);
         },
