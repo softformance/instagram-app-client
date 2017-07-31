@@ -1,76 +1,40 @@
 =============================
-instagram-app-client
+Readme
 =============================
 
-.. image:: https://badge.fury.io/py/instagram-app-client.svg
-    :target: https://badge.fury.io/py/instagram-app-client
+Client-side app for instagram stream.
 
-.. image:: https://travis-ci.org/dmytrolitvinov/instagram-app-client.svg?branch=master
-    :target: https://travis-ci.org/dmytrolitvinov/instagram-app-client
-
-.. image:: https://codecov.io/gh/dmytrolitvinov/instagram-app-client/branch/master/graph/badge.svg
-    :target: https://codecov.io/gh/dmytrolitvinov/instagram-app-client
-
-A sample Django package
-
-Documentation
+Configuration
 -------------
 
-The full documentation is at https://instagram-app-client.readthedocs.io.
+Django
+======
 
-Quickstart
-----------
+- :code:`INSTAGRAM_APP_ID` --- App ID. Default 1.
+- :code:`INSTAGRAM_STREAM_CACHING_BACKEND` --- Caching backend for :code:`requests-cache`. Default :code:`'memory'`.
+    `Docs <https://requests-cache.readthedocs.io/en/latest/user_guide.html#persistence>`_.
 
-Install instagram-app-client::
+Constance
+=========
 
-    pip install instagram-app-client
-
-Add it to your `INSTALLED_APPS`:
 
 .. code-block:: python
 
-    INSTALLED_APPS = (
-        ...
-        'instagram_app_client.apps.InstagramAppClientConfig',
-        ...
-    )
-
-Add instagram-app-client's URL patterns:
-
-.. code-block:: python
-
-    from instagram_app_client import urls as instagram_app_client_urls
-
-
-    urlpatterns = [
-        ...
-        url(r'^', include(instagram_app_client_urls)),
-        ...
-    ]
-
-Features
---------
-
-* TODO
-
-Running Tests
--------------
-
-Does the code actually work?
-
-::
-
-    source <YOURVIRTUALENV>/bin/activate
-    (myenv) $ pip install tox
-    (myenv) $ tox
-
-Credits
--------
-
-Tools used in rendering this package:
-
-*  Cookiecutter_
-*  `cookiecutter-djangopackage`_
-
-.. _Cookiecutter: https://github.com/audreyr/cookiecutter
-.. _`cookiecutter-djangopackage`: https://github.com/pydanny/cookiecutter-djangopackage
+    CONSTANCE_CONFIG = {
+        'INSTAGRAM_STREAM_URL': (
+            'http://stream.dillysocks.com/',
+            u'Instagram steam URL (applied to all widgets)',
+        ),
+        'INSTAGRAM_STREAM_ENABLED': (
+            True,
+            u'Enable or disable all instagram widgets',
+        ),
+        'INSTAGRAM_STREAM_ENABLE_CACHING': (
+            True,
+            u'Enable or disable caching',
+        ),
+        'INSTAGRAM_STREAM_CACHE_EXPIRATION': (
+            600,
+            u'Instagram cache expiration (in seconds). 10 minutes by default',
+        ),
+    }
