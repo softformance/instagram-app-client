@@ -11,3 +11,5 @@ STREAM_CACHE_EXPIRATION = getattr(
     config, 'INSTAGRAM_STREAM_CACHE_EXPIRATION', 60 * 10)  # 10 min by default
 STREAM_CACHING_BACKEND = getattr(
     settings, 'INSTAGRAM_STREAM_CACHING_BACKEND', 'memory')
+IG_CLIENT_LOGGING = getattr(settings, 'IG_CLIENT_LOGGING', True)
+ROOT_DIR = settings.PROJECT_DIR
