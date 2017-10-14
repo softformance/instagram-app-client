@@ -26,13 +26,15 @@ def show_posts(context, tags, app_id=settings.INSTAGRAM_APP_ID, count=None, orde
     """
     {% show_posts app_id=1 tags='test,dilly' %}
     """
-    params = {}
-    tags = unquote(tags)
-    tags = re.findall(r"[\w']+", tags.lower())
-    params['tags'] = tags
-    params['count'] = str(count)
-    params['order_by'] = order_by
-    local_url = urljoin(settings.STREAM_URL, os.path.join('/instagram_app/get_posts/', str(app_id)))
+    params = {'tags': re.findall(r"[\w']+", unquote(tags).lower())}
+    if count and isinstance(count, int):
+        params['count'] = str(count)
+    if order_by:
+        params['order_by'] = order_by
+
+    local_url = urljoin(settings.STREAM_URL, os.path.join(
+        '/instagram_app/get_posts/', str(app_id)
+    ))
 
     try:
         if settings.STREAM_ENABLED:
