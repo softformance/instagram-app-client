@@ -32,20 +32,24 @@ def show_posts(context, tags, app_id=settings.INSTAGRAM_APP_ID, count=None, orde
     if order_by:
         params['order_by'] = order_by
 
+    local_url = urljoin(settings.STREAM_URL, os.path.join(
+        '/instagram_app/get_posts/', str(app_id)
+    ))
+
     if settings.IG_CLIENT_LOGGING:
         try:
             with open(os.path.normpath(os.path.join(
                     settings.ROOT_DIR, 'ig_client.log')), 'a') as log_file:
                 log_file.write(
-                    'In tags: %s, count: %s, order_by: %s.\n Out params: %s.\n'
+                    'In tags: %s, count: %s, order_by: %s.\nOut params: %s.\n'
                     % (tags, order_by, count, params)
+                )
+                log_file.write(
+                    'Enabled: %s, url: %s'
+                    % (settings.STREAM_ENABLED, local_url)
                 )
         except:
             pass
-
-    local_url = urljoin(settings.STREAM_URL, os.path.join(
-        '/instagram_app/get_posts/', str(app_id)
-    ))
 
     try:
         if settings.STREAM_ENABLED:
